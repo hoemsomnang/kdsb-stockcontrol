@@ -1,0 +1,218 @@
+ <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img th:src="@{/admin/dist/img/AdminLTELogo.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img th:src="@{/admin/dist/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.html" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dashboard v1</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-header" style="color:#ffb900">Warehouse Zone</li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-circle"></i>
+              <p>
+                Warehouse
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <!-- Product Instock -->
+            <ul class="nav nav-treeview">
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                   Product Instock
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a th:href="@{/admin/laptop/instock}" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Laptop Instock</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a th:href="@{/admin/desktop/instock}" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Desktop Instock</p>
+                    </a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Device Instock</p>
+                    </a>
+                  </li> -->
+                </ul>
+              </li>
+            </ul>
+            <!-- Product Instock end -->
+            <!-- Product Using -->
+            <ul class="nav nav-treeview">
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                   Product Using & Asset
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a th:href="@{/admin/laptop/using}" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Laptop</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a th:href="@{/admin/desktop/using}" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Desktop</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a th:href="@{/admin/device}" class="nav-link">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Device</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <!-- Product Using End -->
+           </li>
+          <!-- Warehouse End -->
+          <!-- IP Arrangement -->
+          <li class="nav-header" style="color:#ffb900">IP Arrangement Zone</li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                IP Arrangement
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/admin/IP-Twenty-First}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Wire Zone 21st Floor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/admin/IP-Twenty-Second}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Wire Zone 22nd Floor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/admin/IP-Seven}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Wire Zone 7thst Floor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/admin/IP-SaenSokh}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Wire Zone Saen Sokh</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- IP Arrangement End -->
+          <!-- Employee -->
+          <li class="nav-header" style="color:#ffb900">Employee Zone</li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Employee
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/admin/employee}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Of Employee</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/admin/department}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Department</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/admin/branch}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Branch</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- End employee -->
+          <!-- User -->
+          <li class="nav-header" style="color:#ffb900">User Zone</li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                User
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/admin/user}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Of User</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- User End -->
+          
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+    <a id="scrollUp"><i class="fa fa-arrow-up"></i></a>
+  </aside>

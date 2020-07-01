@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{/admin/admin-layout}">
+<head>
+<meta charset="UTF-8">
+<title>Stock Control User Page</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+        <!-- Content Header (Page header) -->
+        
+        <section class="content-header">
+       	
+          <h1>
+           IP 21st Floor
+            <small>advanced tables</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Warehouse</a></li>
+            <li><a href="#">IP Arrangement</a></li>
+            <li class="active">IP 21st Floor</li>
+          </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+        <!--  -->
+        <!-- Add Button -->
+        <a th:href="@{/admin/IP-Twenty-First/excel/IP.xlsx}" class="btn btn-sm btn-success " >Export to excel</a>
+        <!-- Add Button End -->
+        <div class="row">
+        <div class="col-12">
+          <!-- /.card -->
+          <!-- Table for Head Quarter -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">IP 21st Floor</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="ipTwentySecondTable" class="table  table-bordered table-hover table-responsive">
+                <tbody><tr>
+                <th>No</th>
+                <th>IP Address</th>
+                <th>Mac Address</th>
+                <th>User Name</th>
+                <th>Serial Number</th>
+                <th style="width:100px">Location</th>
+                <th>PC's Name</th>
+                <th>Antivirus</th>
+                <th>Remark</th>
+                 <th>Extension</th>
+                <th style="width: 30px;">Reserved</th>
+                <th style="width: 30px;">Update</th>
+               </tr>
+
+                <tr>
+                 <th colspan="12" style="text-align: center;">Wire Zone 21st Floor</th>
+                </tr>
+                </tbody>
+                <tbody id="tableviewlaptop">
+                <tr>
+                 <th colspan="12" style="background-color: #edc536">System</th>
+                </tr>
+                <tr th:each="system:${system}">
+                <td th:text="${system.id}"></td>
+                <td th:text="${system.ip}"></td>
+                <td th:text="${system.macaddress}"></td>
+                <td th:text="${system.username}"></td>
+                <td th:text="${system.sn}"></td>
+                <td th:text="${system.location}"></td>
+                <td th:text="${system.pcname}"></td>
+                <td th:text="${system.antivirus}"></td>
+                <td th:text="${system.ramark}"></td>
+                <td th:text="${system.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${system.id})}" type="button" class="btn btn-success btn-sm  updateIPTwentySecondButton"> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${system.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+               
+                
+               <!-- Management-->
+               <tr>
+                 <th colspan="12" style="background-color: #edc536">Management</th>
+              </tr>
+               <tr th:each="management:${management}">
+                <td th:text="${management.id}"></td>
+                <td th:text="${management.ip}"></td>
+                <td th:text="${management.macaddress}"></td>
+                <td th:text="${management.username}"></td>
+                <td th:text="${management.sn}"></td>
+                <td th:text="${management.location}"></td>
+                <td th:text="${management.pcname}"></td>
+                <td th:text="${management.antivirus}"></td>
+                <td th:text="${management.ramark}"></td>
+                <td th:text="${management.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${management.id})}" type="button" class="btn btn-success btn-sm  updateIPTwentySecondButton"><i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${management.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i> </a></td>
+                
+              <!-- Business Admin-->
+               <tr>
+                 <th colspan="12" style="background-color: #edc536">Business Admin</th>
+              </tr>
+               <tr th:each="BizAdmin:${BizAdmin}">
+                <td th:text="${BizAdmin.id}"></td>
+                <td th:text="${BizAdmin.ip}"></td>
+                <td th:text="${BizAdmin.macaddress}"></td>
+                <td th:text="${BizAdmin.username}"></td>
+                <td th:text="${BizAdmin.sn}"></td>
+                <td th:text="${BizAdmin.location}"></td>
+                <td th:text="${BizAdmin.pcname}"></td>
+                <td th:text="${BizAdmin.antivirus}"></td>
+                <td th:text="${BizAdmin.ramark}"></td>
+                <td th:text="${BizAdmin.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${BizAdmin.id})}" type="button" class="btn btn-success btn-sm  updateIPTwentySecondButton"> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${BizAdmin.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+               
+               
+               <tr>
+                 <th colspan="12" style="background-color: #edc536">Business Sales 3</th>
+              </tr>
+              <tr th:each="BizThree:${BizThree}">
+                <td th:text="${BizThree.id}"></td>
+                <td th:text="${BizThree.ip}"></td>
+                <td th:text="${BizThree.macaddress}"></td>
+                <td th:text="${BizThree.username}"></td>
+                <td th:text="${BizThree.sn}"></td>
+                <td th:text="${BizThree.location}"></td>
+                <td th:text="${BizThree.pcname}"></td>
+                <td th:text="${BizThree.antivirus}"></td>
+                <td th:text="${BizThree.ramark}"></td>
+                <td th:text="${BizThree.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${BizThree.id})}" type="button" class="btn btn-success btn-sm  updateIPTwentySecondButton"> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${BizThree.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+                           
+              <tr>
+                 <th colspan="12" style="background-color: #edc536">Business Sales 4</th>
+              </tr>
+              <tr th:each="BizFour:${BizFour}">
+                <td th:text="${BizFour.id}"></td>
+                <td th:text="${BizFour.ip}"></td>
+                <td th:text="${BizFour.macaddress}"></td>
+                <td th:text="${BizFour.username}"></td>
+                <td th:text="${BizFour.sn}"></td>
+                <td th:text="${BizFour.location}"></td>
+                <td th:text="${BizFour.pcname}"></td>
+                <td th:text="${BizFour.antivirus}"></td>
+                <td th:text="${BizFour.ramark}"></td>
+                <td th:text="${BizFour.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${BizFour.id})}" type="button" class="btn btn-success btn-sm   updateIPTwentySecondButton"> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${BizFour.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+               
+               
+                
+              <tr>
+                 <th colspan="12" style="background-color: #edc536">Collection and Recovery</th>
+              </tr>
+              
+              <tr th:each="Collection:${Collection}">
+                <td th:text="${Collection.id}"></td>
+                <td th:text="${Collection.ip}"></td>
+                <td th:text="${Collection.macaddress}"></td>
+                <td th:text="${Collection.username}"></td>
+                <td th:text="${Collection.sn}"></td>
+                <td th:text="${Collection.location}"></td>
+                <td th:text="${Collection.pcname}"></td>
+                <td th:text="${Collection.antivirus}"></td>
+                <td th:text="${Collection.ramark}"></td>
+                <td th:text="${Collection.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${Collection.id})}" type="button" class="btn btn-success btn-sm  updateIPTwentySecondButton"> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${Collection.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+                
+              
+              <tr>
+                 <th colspan="12" style="background-color: #edc536">Risk Management</th>
+              </tr>
+               <tr th:each="Risk:${Risk}">
+                <td th:text="${Risk.id}"></td>
+                <td th:text="${Risk.ip}"></td>
+                <td th:text="${Risk.macaddress}"></td>
+                <td th:text="${Risk.username}"></td>
+                <td th:text="${Risk.sn}"></td>
+                <td th:text="${Risk.location}"></td>
+                <td th:text="${Risk.pcname}"></td>
+                <td th:text="${Risk.antivirus}"></td>
+                <td th:text="${Risk.ramark}"></td>
+                <td th:text="${Risk.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${Risk.id})}" type="button" class="btn btn-success btn-sm updateIPTwentySecondButton "> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${Risk.id})}" type="button" class="btn  btn-danger btn-sm  deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+                  
+               <tr>
+                 <th colspan="12" style="background-color: #edc536">Marketing</th>
+              </tr>
+              <tr th:each="Marketing:${Marketing}">
+                <td th:text="${Marketing.id}"></td>
+                <td th:text="${Marketing.ip}"></td>
+                <td th:text="${Marketing.macaddress}"></td>
+                <td th:text="${Marketing.username}"></td>
+                <td th:text="${Marketing.sn}"></td>
+                <td th:text="${Marketing.location}"></td>
+                <td th:text="${Marketing.pcname}"></td>
+                <td th:text="${Marketing.antivirus}"></td>
+                <td th:text="${Marketing.ramark}"></td>
+                <td th:text="${Marketing.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${Marketing.id})}" type="button" class="btn btn-success btn-sm updateIPTwentySecondButton "> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${Marketing.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+              </tr>
+               
+              
+              <tr>
+                 <th colspan="12" style="background-color: #edc536">Assessment</th>
+              </tr>
+              <tr th:each="Assessment:${Assessment}">
+                <td th:text="${Assessment.id}"></td>
+                <td th:text="${Assessment.ip}"></td>
+                <td th:text="${Assessment.macaddress}"></td>
+                <td th:text="${Assessment.username}"></td>
+                <td th:text="${Assessment.sn}"></td>
+                <td th:text="${Assessment.location}"></td>
+                <td th:text="${Assessment.pcname}"></td>
+                <td th:text="${Assessment.antivirus}"></td>
+                <td th:text="${Assessment.ramark}"></td>
+                <td th:text="${Assessment.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${Assessment.id})}" type="button" class="btn btn-success btn-sm updateIPTwentySecondButton ">  <i class="far fa-edit"></i> </a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${Assessment.id})}" type="button" class="btn  btn-danger btn-sm  deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+              </tr>
+                
+              
+              
+              <tr>
+                 <th colspan="12" style="background-color: #edc536">Printer</th>
+              </tr>
+              <tr th:each="Printer:${Printer}">
+                <td th:text="${Printer.id}"></td>
+                <td th:text="${Printer.ip}"></td>
+                <td th:text="${Printer.macaddress}"></td>
+                <td th:text="${Printer.username}"></td>
+                <td th:text="${Printer.sn}"></td>
+                <td th:text="${Printer.location}"></td>
+                <td th:text="${Printer.pcname}"></td>
+                <td th:text="${Printer.antivirus}"></td>
+                <td th:text="${Printer.ramark}"></td>
+                <td th:text="${Printer.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${Printer.id})}" type="button" class="btn btn-success btn-sm updateIPTwentySecondButton "> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${Printer.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"   ><i class="fas fa-trash-alt"></i></a></td>
+              </tr>
+              
+                
+                <tr>
+                 <th colspan="12" style="background-color: #edc536">FingerPrint</th>
+              </tr>
+              <tr th:each="FingerPrint:${FingerPrint}">
+                <td th:text="${FingerPrint.id}"></td>
+                <td th:text="${FingerPrint.ip}"></td>
+                <td th:text="${FingerPrint.macaddress}"></td>
+                <td th:text="${FingerPrint.username}"></td>
+                <td th:text="${FingerPrint.sn}"></td>
+                <td th:text="${FingerPrint.location}"></td>
+                <td th:text="${FingerPrint.pcname}"></td>
+                <td th:text="${FingerPrint.antivirus}"></td>
+                <td th:text="${FingerPrint.ramark}"></td>
+                <td th:text="${FingerPrint.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${FingerPrint.id})}" type="button" class="btn btn-success btn-sm updateIPTwentySecondButton"> <i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${FingerPrint.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton "   ><i class="fas fa-trash-alt"></i> </a></td>
+              </tr>
+                
+              <tr>
+                 <th colspan="12" style="background-color: #edc536">Phone</th>
+              </tr>
+                <tr th:each="Phone:${Phone}">
+                <td th:text="${Phone.id}"></td>
+                <td th:text="${Phone.ip}"></td>
+                <td th:text="${Phone.macaddress}"></td>
+                <td th:text="${Phone.username}"></td>
+                <td th:text="${Phone.sn}"></td>
+                <td th:text="${Phone.location}"></td>
+                <td th:text="${Phone.pcname}"></td>
+                <td th:text="${Phone.antivirus}"></td>
+                <td th:text="${Phone.ramark}"></td>
+                <td th:text="${Phone.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${Phone.id})}" type="button" class="btn btn-success btn-sm updateIPTwentySecondButton"><i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${Phone.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"><i class="fas fa-trash-alt"></i> </a></td>
+              </tr>
+                 <tr>
+                 <th colspan="12" style="background-color: #edc536">Switch</th>
+              </tr>
+                <tr th:each="Switch:${Switch}">
+                <td th:text="${Switch.id}"></td>
+                <td th:text="${Switch.ip}"></td>
+                <td th:text="${Switch.macaddress}"></td>
+                <td th:text="${Switch.username}"></td>
+                <td th:text="${Switch.sn}"></td>
+                <td th:text="${Switch.location}"></td>
+                <td th:text="${Switch.pcname}"></td>
+                <td th:text="${Switch.antivirus}"></td>
+                <td th:text="${Switch.ramark}"></td>
+                <td th:text="${Switch.extension}"></td>
+                <td>  <a th:href="@{/admin/IP-Twenty-First/findById/{id}(id=${Switch.id})}" type="button" class="btn btn-success btn-sm updateIPTwentySecondButton"><i class="far fa-edit"></i></a></td>
+                <td>  <a  th:href="@{/admin/IP-Twenty-First/delete/{id}(id=${Switch.id})}" type="button" class="btn  btn-danger btn-sm deleteIPTwentySecondButton"><i class="fas fa-trash-alt"></i> </a></td>
+              </tr>
+              </tbody>
+               <tbody>
+               </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- Table For Saen Sokh Branch -->
+        
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+        <!--  -->
+</section><!-- /.content -->
+
+<!-- Update Modal -->
+ <div class="modal fade" id=updateIPModal tabindex="-1" role="dialog"  aria-hidden="true">
+ <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Update IP Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form   id="updateIPForm"  method="POST">
+          <div class="row">
+          	<div class="col-6"> 
+          		<div class="form-group">
+          		    <input type="text" id="id" hidden="true" >
+		            <label for="recipient-name" class="col-form-label">MacAddress</label>
+		            <input type="text" class="form-control" id="macaddress" >
+		        </div>
+          		<div class="form-group">
+		            <label for="recipient-name" class="col-form-label">User Name</label>
+		            <input type="text" class="form-control" id="username" >
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Serial Number</label>
+		            <input type="text" class="form-control" id="sn" >
+		        </div>
+		         <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Location</label>
+		            <input type="text" class="form-control" id="location" >
+		        </div>
+		      
+          	</div>
+          	<div class="col-6"> 
+          		  <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">PC's Name</label>
+		            <input type="text" class="form-control" id="pcname" >
+		        </div>
+		       <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Antivirus</label>
+		            <input type="text" class="form-control" id="antivirus" >
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Remark</label>
+		            <input class="form-control" id="remark" >
+		        </div>
+		        
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Extension</label>
+		            <input type="text" class="form-control" id="extension" >
+		        </div>
+          	</div>
+          </div>
+          <div class="form-group">
+           <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i></button>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- Update Modal End -->
+<!-- Delete Modal  -->
+<div class="modal fade" id="deleteDeviceModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure, you want to reserved this IP?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">No, Cancel</button>
+        <a  type="submit" class="btn btn-sm btn-danger" id="deleteConfirmIPButton" href="">Yes, Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete Modal End -->
+
+</div>
+<th:block layout:fragment="script">
+<script th:src="@{/admin/js/ip-twenty-first.js}"></script>
+</th:block>
+</body>
+</html>

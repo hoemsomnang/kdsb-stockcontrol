@@ -1,0 +1,781 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{/admin/admin-layout}">
+<head>
+<meta charset="UTF-8">
+<title>Stock Control User Page</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+           Laptop Using
+            <small>advanced tables</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>Warehouse</a></li>
+            <li><a href="#">Product Using</a></li>
+            <li class="active">Laptop Using</li>
+          </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+        <!------------------------------------->
+        <!-- ------------Add Button--------- -->
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addLaptopInstockModal" >Add</button>
+        <a th:href="@{/admin/laptop/using/excel/laptop.xlsx}" class="btn btn-sm btn-success " style="float:right;">Export to excel</a>
+        <!-- Add Button End -->
+        <div class="row">
+        <div class="col-12">
+          <!-- /.card -->
+          <!-- Table for Head Quarter -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Head Quarter</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="laptopTableHQ" class="table  table-bordered table-hover table-responsive">
+                <thead>
+                      <tr role="row"> 
+                      <th >Employee's Name</th>
+                      <th >Department</th>
+                      <th >Position</th>
+                      <th >Laptop's model</th>
+                      <th >CPU</th>
+                      <th >RAM</th>
+                      <th>HHD</th>
+                      <th>Display</th>
+                      <th >OS</th>
+                      <th >Serial Number</th>
+                      <th >Asset Number</th>
+                      <th >Date instock</th>
+                      <th >Date Using</th>
+                      <th >Remark</th>
+                      <th >Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Get Value -->
+                    <!-- Management Block -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Management</td>
+                    </tr>
+                     <tr th:each="listManagement:${listManagement}">
+                     <td th:text="${listManagement.empname}"></td>
+                     <td th:text="${listManagement.deptname}"></td>
+                     <td th:text="${listManagement.position}"></td>
+                     <td th:text="${listManagement.model}"></td>
+                     <td th:text="${listManagement.cpu}"></td>
+                     <td th:text="${listManagement.ram}"></td>
+                     <td th:text="${listManagement.hhd}"></td>
+                     <td th:text="${listManagement.display}"></td>
+                     <td th:text="${listManagement.os}"></td>
+                     <td th:text="${listManagement.sn}"></td>
+                     <td th:text="${listManagement.asset}"></td>
+                     <td th:text="${#dates.format(listManagement.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listManagement.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listManagement.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listManagement.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listManagement.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                    </tr>
+                    <!-- HR and Admin Block -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">HR and Admin</td>
+                    </tr>
+                     <tr th:each="listHR:${listHR}">
+                     <td th:text="${listHR.empname}"></td>
+                     <td th:text="${listHR.deptname}"></td>
+                     <td th:text="${listHR.position}"></td>
+                     <td th:text="${listHR.model}"></td>
+                     <td th:text="${listHR.cpu}"></td>
+                     <td th:text="${listHR.ram}"></td>
+                     <td th:text="${listHR.hhd}"></td>
+                     <td th:text="${listHR.display}"></td>
+                     <td th:text="${listHR.os}"></td>
+                     <td th:text="${listHR.sn}"></td>
+                     <td th:text="${listHR.asset}"></td>
+                     <td th:text="${#dates.format(listHR.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listHR.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listHR.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listHR.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listHR.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                    </tr>
+                    <!-- IT Support -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">IT Support</td>
+                    </tr>
+                     <tr th:each="listIT:${listIT}">
+                     <td th:text="${listIT.empname}"></td>
+                     <td th:text="${listIT.deptname}"></td>
+                     <td th:text="${listIT.position}"></td>
+                     <td th:text="${listIT.model}"></td>
+                     <td th:text="${listIT.cpu}"></td>
+                     <td th:text="${listIT.ram}"></td>
+                     <td th:text="${listIT.hhd}"></td>
+                     <td th:text="${listIT.display}"></td>
+                     <td th:text="${listIT.os}"></td>
+                     <td th:text="${listIT.sn}"></td>
+                     <td th:text="${listIT.asset}"></td>
+                     <td th:text="${#dates.format(listIT.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listIT.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listIT.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listIT.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listIT.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Finance and Accounting -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Finance and Accounting</td>
+                    </tr>
+                     <tr th:each="listFinance:${listFinance}">
+                     <td th:text="${listFinance.empname}"></td>
+                     <td th:text="${listFinance.deptname}"></td>
+                     <td th:text="${listFinance.position}"></td>
+                     <td th:text="${listFinance.model}"></td>
+                     <td th:text="${listFinance.cpu}"></td>
+                     <td th:text="${listFinance.ram}"></td>
+                     <td th:text="${listFinance.hhd}"></td>
+                     <td th:text="${listFinance.display}"></td>
+                     <td th:text="${listFinance.os}"></td>
+                     <td th:text="${listFinance.sn}"></td>
+                     <td th:text="${listFinance.asset}"></td>
+                     <td th:text="${#dates.format(listFinance.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listFinance.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listFinance.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listFinance.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listFinance.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Card  -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Card</td>
+                    </tr>
+                     <tr th:each="listCard:${listCard}">
+                     <td th:text="${listCard.empname}"></td>
+                     <td th:text="${listCard.deptname}"></td>
+                     <td th:text="${listCard.position}"></td>
+                     <td th:text="${listCard.model}"></td>
+                     <td th:text="${listCard.cpu}"></td>
+                     <td th:text="${listCard.ram}"></td>
+                     <td th:text="${listCard.hhd}"></td>
+                     <td th:text="${listCard.display}"></td>
+                     <td th:text="${listCard.os}"></td>
+                     <td th:text="${listCard.sn}"></td>
+                     <td th:text="${listCard.asset}"></td>
+                     <td th:text="${#dates.format(listCard.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listCard.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listCard.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listCard.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listCard.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Business Admin -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Business Admin</td>
+                    </tr>
+                     <tr th:each="listBizAdmin:${listBizAdmin}">
+                     <td th:text="${listBizAdmin.empname}"></td>
+                     <td th:text="${listBizAdmin.deptname}"></td>
+                     <td th:text="${listBizAdmin.position}"></td>
+                     <td th:text="${listBizAdmin.model}"></td>
+                     <td th:text="${listBizAdmin.cpu}"></td>
+                     <td th:text="${listBizAdmin.ram}"></td>
+                     <td th:text="${listBizAdmin.hhd}"></td>
+                     <td th:text="${listBizAdmin.display}"></td>
+                     <td th:text="${listBizAdmin.os}"></td>
+                     <td th:text="${listBizAdmin.sn}"></td>
+                     <td th:text="${listBizAdmin.asset}"></td>
+                     <td th:text="${#dates.format(listBizAdmin.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listBizAdmin.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listBizAdmin.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listBizAdmin.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listBizAdmin.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Business Sales1 -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Business Sales 1</td>
+                    </tr>
+                     <tr th:each="listBizOne:${listBizOne}">
+                     <td th:text="${listBizOne.empname}"></td>
+                     <td th:text="${listBizOne.deptname}"></td>
+                     <td th:text="${listBizOne.position}"></td>
+                     <td th:text="${listBizOne.model}"></td>
+                     <td th:text="${listBizOne.cpu}"></td>
+                     <td th:text="${listBizOne.ram}"></td>
+                     <td th:text="${listBizOne.hhd}"></td>
+                     <td th:text="${listBizOne.display}"></td>
+                     <td th:text="${listBizOne.os}"></td>
+                     <td th:text="${listBizOne.sn}"></td>
+                     <td th:text="${listBizOne.asset}"></td>
+                     <td th:text="${#dates.format(listBizOne.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listBizOne.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listBizOne.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listBizOne.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listBizOne.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Business Sales 2 -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Business Sales 2</td>
+                    </tr>
+                     <tr th:each="listBizTwo:${listBizTwo}">
+                     <td th:text="${listBizTwo.empname}"></td>
+                     <td th:text="${listBizTwo.deptname}"></td>
+                     <td th:text="${listBizTwo.position}"></td>
+                     <td th:text="${listBizTwo.model}"></td>
+                     <td th:text="${listBizTwo.cpu}"></td>
+                     <td th:text="${listBizTwo.ram}"></td>
+                     <td th:text="${listBizTwo.hhd}"></td>
+                     <td th:text="${listBizTwo.display}"></td>
+                     <td th:text="${listBizTwo.os}"></td>
+                     <td th:text="${listBizTwo.sn}"></td>
+                     <td th:text="${listBizTwo.asset}"></td>
+                     <td th:text="${#dates.format(listBizTwo.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listBizTwo.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listBizTwo.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listBizTwo.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listBizTwo.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      
+                      </tr>
+                    <!-- Business Sales 3 -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Business Sales 3</td>
+                    </tr>
+                     <tr th:each="listBizThree:${listBizThree}">
+                     <td th:text="${listBizThree.empname}"></td>
+                     <td th:text="${listBizThree.deptname}"></td>
+                     <td th:text="${listBizThree.position}"></td>
+                     <td th:text="${listBizThree.model}"></td>
+                     <td th:text="${listBizThree.cpu}"></td>
+                     <td th:text="${listBizThree.ram}"></td>
+                     <td th:text="${listBizThree.hhd}"></td>
+                     <td th:text="${listBizThree.display}"></td>
+                     <td th:text="${listBizThree.os}"></td>
+                     <td th:text="${listBizThree.sn}"></td>
+                     <td th:text="${listBizThree.asset}"></td>
+                     <td th:text="${#dates.format(listBizThree.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listBizThree.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listBizThree.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listBizThree.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listBizThree.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Business Sales 4 -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Business Sales 4</td>
+                    </tr>
+                     <tr th:each="listBizFour:${listBizFour}">
+                     <td th:text="${listBizFour.empname}"></td>
+                     <td th:text="${listBizFour.deptname}"></td>
+                     <td th:text="${listBizFour.position}"></td>
+                     <td th:text="${listBizFour.model}"></td>
+                     <td th:text="${listBizFour.cpu}"></td>
+                     <td th:text="${listBizFour.ram}"></td>
+                     <td th:text="${listBizFour.hhd}"></td>
+                     <td th:text="${listBizFour.display}"></td>
+                     <td th:text="${listBizFour.os}"></td>
+                     <td th:text="${listBizFour.sn}"></td>
+                     <td th:text="${listBizFour.asset}"></td>
+                     <td th:text="${#dates.format(listBizFour.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listBizFour.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listBizFour.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listBizFour.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listBizFour.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Legal and Compliance -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Legal and Compliance</td>
+                    </tr>
+                     <tr th:each="listLegal:${listLegal}">
+                     <td th:text="${listLegal.empname}"></td>
+                     <td th:text="${listLegal.deptname}"></td>
+                     <td th:text="${listLegal.position}"></td>
+                     <td th:text="${listLegal.model}"></td>
+                     <td th:text="${listLegal.cpu}"></td>
+                     <td th:text="${listLegal.ram}"></td>
+                     <td th:text="${listLegal.hhd}"></td>
+                     <td th:text="${listLegal.display}"></td>
+                     <td th:text="${listLegal.os}"></td>
+                     <td th:text="${listLegal.sn}"></td>
+                     <td th:text="${listLegal.asset}"></td>
+                     <td th:text="${#dates.format(listLegal.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listLegal.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listLegal.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listLegal.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listLegal.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Internal Audit -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Internal Audit</td>
+                    </tr>
+                     <tr th:each="listAudit:${listAudit}">
+                     <td th:text="${listAudit.empname}"></td>
+                     <td th:text="${listAudit.deptname}"></td>
+                     <td th:text="${listAudit.position}"></td>
+                     <td th:text="${listAudit.model}"></td>
+                     <td th:text="${listAudit.cpu}"></td>
+                     <td th:text="${listAudit.ram}"></td>
+                     <td th:text="${listAudit.hhd}"></td>
+                     <td th:text="${listAudit.display}"></td>
+                     <td th:text="${listAudit.os}"></td>
+                     <td th:text="${listAudit.sn}"></td>
+                     <td th:text="${listAudit.asset}"></td>
+                     <td th:text="${#dates.format(listAudit.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listAudit.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listAudit.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listAudit.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listAudit.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- Risk Management -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">Risk Management</td>
+                    </tr>
+                     <tr th:each="listRisk:${listRisk}">
+                     <td th:text="${listRisk.empname}"></td>
+                     <td th:text="${listRisk.deptname}"></td>
+                     <td th:text="${listRisk.position}"></td>
+                     <td th:text="${listRisk.model}"></td>
+                     <td th:text="${listRisk.cpu}"></td>
+                     <td th:text="${listRisk.ram}"></td>
+                     <td th:text="${listRisk.hhd}"></td>
+                     <td th:text="${listRisk.display}"></td>
+                     <td th:text="${listRisk.os}"></td>
+                     <td th:text="${listRisk.sn}"></td>
+                     <td th:text="${listRisk.asset}"></td>
+                     <td th:text="${#dates.format(listRisk.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listRisk.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listRisk.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listRisk.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listRisk.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    <!-- All CO -->
+                    <tr>
+                    	<td colspan="15" Style="background-color: #edc536">All CO</td>
+                    </tr>
+                     <tr th:each="listCO:${listCO}">
+                     <td th:text="${listCO.empname}"></td>
+                     <td th:text="${listCO.deptname}"></td>
+                     <td th:text="${listCO.position}"></td>
+                     <td th:text="${listCO.model}"></td>
+                     <td th:text="${listCO.cpu}"></td>
+                     <td th:text="${listCO.ram}"></td>
+                     <td th:text="${listCO.hhd}"></td>
+                     <td th:text="${listCO.display}"></td>
+                     <td th:text="${listCO.os}"></td>
+                     <td th:text="${listCO.sn}"></td>
+                     <td th:text="${listCO.asset}"></td>
+                     <td th:text="${#dates.format(listCO.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listCO.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listCO.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listCO.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listCO.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                      </tr>
+                    </tbody>
+                    
+                    
+                <tfoot>
+                <tr>
+                     <th >Employee's Name</th>
+                      <th >Department</th>
+                      <th >Position</th>
+                      <th >Laptop's model</th>
+                      <th >CPU</th>
+                      <th >RAM</th>
+                      <th >OS</th>
+                      <th >OS Version</th>
+                      <th >Serial Number</th>
+                      <th >Asset Number</th>
+                      <th >Date instock</th>
+                      <th >Date Using</th>
+                      <th >Remark</th>
+                      <th >Action</th>
+                </tr>
+                </tfoot>
+              </table>
+              <table class="table table-responsive ">
+               <tbody>
+               <tr><td> Instock</td>  <td th:text="${countInstockHQ}"></td> </tr>
+               <tr><td> Using</td> <td th:text="${countUsingHQ}"></td></tr>
+               <tr> <td> Total</td>  <td th:text="${countAllHQ}"></td></tr>
+               </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-------------------------------------------------------->
+        <!------------Table for Head Quarter End------------------>
+        
+        <!-------------------------------------------------------->
+        <!------------Table For Saen Sokh Branch ------------------>
+        <div class="col-12">
+        <!-- /.card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Saen Sokh Branch</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="laptopTableSaenSokh" class="table  table-bordered table-hover table-responsive">
+                <thead>
+                      <tr role="row">
+                      <th >Employee's Name</th>
+                      <th >Department</th>
+                      <th >Position</th>
+                      <th >Laptop's model</th>
+                      <th >CPU</th>
+                      <th >RAM</th>
+                      <th >OS</th>
+                      <th >OS Version</th>
+                      <th >Serial Number</th>
+                      <th >Asset Number</th>
+                      <th >Date instock</th>
+                      <th >Date Using</th>
+                      <th >Remark</th>
+                      <th >Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                   <tr th:each="listSaenSokh:${listSaenSokh}">
+                     <td th:text="${listSaenSokh.empname}"></td>
+                     <td th:text="${listSaenSokh.deptname}"></td>
+                     <td th:text="${listSaenSokh.position}"></td>
+                     <td th:text="${listSaenSokh.model}"></td>
+                     <td th:text="${listSaenSokh.cpu}"></td>
+                     <td th:text="${listSaenSokh.ram}"></td>
+                     <td th:text="${listSaenSokh.hhd}"></td>
+                     <td th:text="${listSaenSokh.display}"></td>
+                     <td th:text="${listSaenSokh.os}"></td>
+                     <td th:text="${listSaenSokh.sn}"></td>
+                     <td th:text="${listSaenSokh.asset}"></td>
+                     <td th:text="${#dates.format(listSaenSokh.datein, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${#dates.format(listSaenSokh.dateusing, 'dd-MM-yyyy' )}"></td>
+                     <td th:text="${listSaenSokh.remark}"></td>
+                      <td>
+                      <a th:href="@{/admin/laptop/using/findById/(lapid=${listSaenSokh.lapid})}" class="btn  btn-sm btn-primary" id="ButtonUpdateLaptopInstock"><i class="fa fa-edit"></i> </a>
+                      <a th:href="@{/admin/laptop/using/return-to-stock/(lapid=${listSaenSokh.lapid})}"  class="btn  btn-sm btn-danger" id="ButtonDeleteLaptopInstock"><i class="fa fa-trash"></i></a> 
+                      </td>
+                     </tr>
+                    </tbody>
+                <tfoot>
+                <tr>	
+                    <th >Employee's Name</th>
+                      <th >Department</th>
+                      <th >Position</th>
+                      <th >Laptop's model</th>
+                      <th >CPU</th>
+                      <th >RAM</th>
+                      <th>HHD</th>
+                      <th>Display</th>
+                      <th >OS</th>
+                      <th >Serial Number</th>
+                      <th >Asset Number</th>
+                      <th >Date instock</th>
+                      <th >Date Using</th>
+                      <th >Remark</th>
+                      <th >Action</th>
+                </tr>
+                </tfoot>
+              </table>
+              <table class="table table-responsive ">
+               <tbody>
+               <tr><td> Instock</td>  <td th:text="${countInstockSaenSokh}"> </td> </tr>
+               <tr><td> Using</td>    <td th:text="${countUsingSaenSokh}"></td></tr>
+               <tr> <td> Total</td>   <td th:text="${countAllSaenSokh}"></td></tr>
+               </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        <!-- ----------------------------------------- -->
+        <!-- --------Table for Saen Sokh End---------- -->
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+</section><!-- /.content -->
+
+<!-- --------------------------------------------------- -->
+<!------------------Add Model Block--------------------- -->
+ <div class="modal fade" id="addLaptopInstockModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Add Laptop for Using</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  th:action="@{/admin/laptop/using/add-Using}" id="addLaptopUsingForm"  method="POST">
+          <div class="row">
+          	<div class="col-6"> 
+          		<div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Employee's Name</label>
+		            <select class="form-control " id="empid" required="required">
+		            	<option th:each="listEmployee:${listEmployee}" th:value="${listEmployee.empid}" th:text="${listEmployee.empname}"></option>
+		            </select>
+		            <input class="form-control" hidden="true" type="text" id="empname">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Department</label>
+		            <input type="text" class="form-control" id="deptid" readonly="readonly" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Position</label>
+		            <input type="text" class="form-control" id="position" readonly="readonly" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Working Place</label>
+		            <input type="text" class="form-control" id="brid" readonly="readonly" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Laptop's Model</label>
+		            <select class="form-control" id="model" required="required">
+		              <option th:each="notYetUsing:${listLaptop}" th:value="${notYetUsing.lapid}" th:text="${notYetUsing.model}" ></option>
+		            </select>
+		            <input type="text" class="form-control" hidden="true" id="lapmodel">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">PC's name</label>
+		            <input type="text" class="form-control" id="pcname" readonly="readonly">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">CPU</label>
+		            <input type="text" class="form-control" id="cpu" readonly="readonly">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">RAM</label>
+		            <input type="text" class="form-control" id="ram" readonly="readonly">
+		        </div>
+          	</div>
+          	<div class="col-6"> 
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Hard Disk</label>
+		            <input type="text" class="form-control" id="hhd" readonly="readonly">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Display</label>
+		            <input class="form-control" id="display" readonly="readonly" type="text">
+		        </div>
+		         <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">OS</label>
+		            <input type="text" class="form-control" id="os" readonly="readonly">
+		        </div>
+		         <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Serial Number</label>
+		            <input type="text" class="form-control" id="sn" readonly="readonly">
+		        </div>
+		         <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Asset</label>
+		            <input type="text" class="form-control" id="asset" readonly="readonly">
+		        </div>
+		         <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Date Instock</label>
+		            <div class="input-group">
+	                  <div class="input-group-prepend">
+	                     <span class="input-group-text">
+	                     <i class="far fa-calendar-alt"></i>
+	                     </span>
+	                  </div>
+	                  <input disabled="disabled" type="date" id="datein" class="form-control float-right"  data-date-format="yyyy-mm-dd"   required="required">
+	                </div>
+		        </div>
+		         <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Date Using</label>
+		             <div class="input-group">
+	                  <div class="input-group-prepend">
+	                     <span class="input-group-text">
+	                     <i class="far fa-calendar-alt"></i>
+	                     </span>
+	                  </div>
+	                  <input type="date" id="dateusing" class="form-control float-right"  data-date-format="yyyy-mm-dd"   required="required">
+	                </div>
+		        </div>
+		         <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Remark</label>
+		            <input type="text" class="form-control" id="remark" >
+		        </div>
+          	</div>
+          </div>
+          <div class="form-group">
+           <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i></button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+       
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- ------------------------------------ -->
+<!-- -----------Add Modal End------------ -->
+
+<!-- ------------------------------------ -->
+<!-- -----------Update Modal------------- -->
+ <div class="modal fade" id="updateLaptopInstockModal" tabindex="-1" role="dialog"  aria-hidden="true">
+ <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Update Laptop Information</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+        <form  th:action="@{/admin/laptop/using/update}"   id="updateLaptopUsingForm"  method="POST">
+          <div class="row">
+          	<div class="col-6"> 
+          	    
+		           <!--  <label for="recipient-name" class="col-form-label">ID</label> -->
+		            <input type="text" class="form-control" hidden="true" id="lapidEdit" required="required">
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Employee's Name</label>
+		            <input type="text" class="form-control" id="empnameEdit" disabled="disabled" required="required">
+		        </div>
+          		<div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Model</label>
+		            <input type="text" class="form-control" id="modelEdit" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">CPU</label>
+		            <input type="text" class="form-control" id="cpuEdit" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">RAM</label>
+		            <input type="text" class="form-control" id="ramEdit" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Hard Disk</label>
+		            <input type="text" class="form-control" id="hhdEdit" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Display</label>
+		            <input type="text" class="form-control" id="displayEdit" required="required">
+		        </div>
+          	</div>
+          	<div class="col-6"> 
+          		<!-- /* div class="form-group">
+		            <label for="recipient-name" class="col-form-label">OS</label>
+		            <select class="form-control" id="osEdit" required="required">
+		             <option value="">Pleas select OS</option>
+		             <option value="Windows 10">Windows 10</option>
+		             <option value="macOS">macOS</option>
+		            </select>
+		        </div> */ -->
+		        
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Serial Number</label>
+		            <input type="text" class="form-control" id="snEdit" required="required">
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Asset Number</label>
+		            <input type="text" class="form-control" id="assetEdit" >
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Date Purchase</label>
+		            <div class="input-group">
+	                  <div class="input-group-prepend">
+	                     <span class="input-group-text">
+	                     <i class="far fa-calendar-alt"></i>
+	                     </span>
+	                  </div>
+	                  <input type="date" id="dateinEdit" disabled="disabled" class="form-control float-right"  data-date-format="yyyy-mm-dd"   required="required">
+	                </div>
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Date Using</label>
+		            <div class="input-group">
+	                  <div class="input-group-prepend">
+	                     <span class="input-group-text">
+	                     <i class="far fa-calendar-alt"></i>
+	                     </span>
+	                  </div>
+	                  <input type="date" id="dateusingEdit" class="form-control float-right"  data-date-format="yyyy-mm-dd"   required="required">
+	                </div>
+		        </div>
+		        <div class="form-group">
+		            <label for="recipient-name" class="col-form-label">Remark</label>
+		            <input type="text" class="form-control" id="remarkEdit" >
+		        </div>
+          	</div>
+          </div>
+          <div class="form-group">
+           <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i></button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- ------------------------------------- -->
+<!-- ----------Update Modal End----------- -->
+
+
+<!-- ------------------------------------- -->
+<!-- -------------Delete Modal-----------  -->
+<div class="modal fade" id="deleteLaptopInstockModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Return to stock</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure, you want to return this laptop to stock?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">No, Cancel</button>
+        <a  type="submit" class="btn btn-sm btn-danger" id="deleteConfirmLaptopInstockButton" href="">Yes, Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- -------------------------------------- -->
+<!-- ---------Delete Modal End------------- -->
+</div>
+<!-- -------------------------------------- -->
+<!-- ----------Layout Content End---------- -->
+
+<th:block layout:fragment="script">
+<script th:src="@{/admin/js/laptop-using.js}"></script>
+</th:block>
+</body>
+</html>
